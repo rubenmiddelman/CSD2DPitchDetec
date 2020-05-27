@@ -22,6 +22,7 @@ var offset;
 var r = 0;
 
 function setup() {
+  //sets up the mic device and the synth that plays the lick
   createCanvas(windowWidth, windowHeight);
   background(255);
   console.log('ml5 version:', ml5.version);
@@ -38,11 +39,12 @@ function setup() {
   mic.start(Listening)
 
 }
-
+//resets function that resets list
 function Retry(){
   r = 0;
   i = 0;
 }
+// makes sure the pitch detection works
 function Listening(){
   console.log("listening");
   pitch = ml5.pitchDetection(
@@ -53,7 +55,7 @@ function Listening(){
  )
     getPitch()
 }
-
+//gets the pitch
 function getPitch() {
   pitch.getPitch(function(err, frequency) {
     if (frequency) {
@@ -64,13 +66,13 @@ function getPitch() {
     getPitch();
   })
 }
-
+//also makes sure the pitch detection works
 function modelLoaded() {
   console.log("Model Loaded!");
 }
 
 
-
+// draws wich note should be played
 function draw() {
   createCanvas(windowWidth, windowHeight);
   background(255);
@@ -106,7 +108,7 @@ function draw() {
       r ++;
     }
 }
-
+//plays the lick
 function PlayLick(){
   userStartAudio();
   var i = 0;

@@ -26,6 +26,8 @@ var n = 0;
 const row_ar = [];
 
 let img;
+
+//sets up all devices
 function setup() {
   userStartAudio();
   monoSynth = new p5.MonoSynth();
@@ -39,6 +41,8 @@ function setup() {
   mic = new p5.AudioIn();
   mic.start(Listening)
 }
+
+//makes sure pitch detec is working
 function Listening(){
   console.log("listening");
   pitch = ml5.pitchDetection(
@@ -49,7 +53,7 @@ function Listening(){
  )
     getPitch()
 }
-
+//gets the pitch
 function getPitch() {
   pitch.getPitch(function(err, frequency) {
     if (frequency) {
@@ -59,12 +63,12 @@ function getPitch() {
     getPitch();
   })
 }
-
+//makes sure the pitch detec is working
 function modelLoaded() {
   console.log("Model Loaded!");
 }
 
-
+//draws the grid
 $(document).ready(function() {
   $("#grids").html();
   $("#grids").css({
@@ -166,10 +170,12 @@ function draw() {
     }
   }
 }
+//clears list
 function Clear(){
   noteFreq = [];
   noteNum = [];
 }
+//turnes row numbers in to freq and note names and then plays them
 function PlayLick(){
   Clear();
   for(i in row_ar){
